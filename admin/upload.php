@@ -5,17 +5,16 @@
 
  if(isset($_POST['save']))  {
 
-   echo "<h1>HELLO</h1>";
-  // $photo = new Photo();
-  // $photo->title = $_POST['title'];
-  // $photo->set_file($_FILES['file_upload']);
-  //
-  // if($photo->save()){
-  //   $message = "Photo uploaded Successfully";
-  // } else {
-  //   $message = join("<br>", $photo->errors);
-  // }
-} 
+  $photo = new Photo();
+  $photo->title = $_POST['title'];
+  $photo->set_file($_FILES['file_upload']);
+
+  if($photo->save()){
+    $message = "Photo uploaded Successfully";
+  } else {
+    $message = join("<br>", $photo->errors);
+  }
+}
 
 
 ?>
@@ -43,8 +42,8 @@
               <div class="row">
                   <div class="col-lg-12">
                       <h1 class="page-header">
-                        Upload
-                          <small>Subheading</small>
+                        Upload Photos
+
                       </h1>
                       <div class="col-md-6">
 
@@ -52,12 +51,12 @@
 
                       <form action="<?php $_SERVER['PHP_SELF']?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
-                          <input type="text" name"title" class="form-control">
+                          <input type="text" name="title" class="form-control">
                         </div>
                         <div class="form-group">
-                          <input type="file" name"file_upload" >
+                          <input type="file" name="file_upload" >
                         </div>
-                        <input type="submit" name"save" value="Save">
+                        <input type="submit" name="save" value="Save">
 
                       </form>
                       </div>
