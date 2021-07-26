@@ -21,15 +21,17 @@ if(empty($_GET['id'])){
     if(empty($_FILES['user_image'])) {
 
       $user->save();
+      redirect("users.php");
+      $session->message("The user has been updated");
     } else {
 
       $user->set_file($_FILES['user_image']);
-
       $user->upload_photo();
-
       $user->save();
 
-      redirect("edit_user.php?id={$user->id}");
+
+    //  redirect("edit_user.php?id={$user->id}");
+    redirect("users.php");
     }
 
 
@@ -66,7 +68,7 @@ if(empty($_GET['id'])){
                         <small>Subheading</small>
                     </h1>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6 user_image_box">
                       <a href="#" data-toggle="modal" data-target="#photo-library">
                      <img class="img-responsive" src="<?php echo $user->image_path_placeholder()?>" alt="">
                       </a>
@@ -113,15 +115,13 @@ if(empty($_GET['id'])){
 
                       <label for="password">Password</label>
 
-                      <input type="password" name="password" class="form-control" value="<?php echo $user->last_name?>">
+                      <input type="password" name="password" class="form-control" value="<?php echo $user->password?>">
 
                       </div>
 
-                      <a href="delete_user.php?id=<?php echo $user->id?>" class = "btn btn-danger">Delete</a>
+                      <a id="user-id" href="delete_user.php?id=<?php echo $user->id?>" class = "btn btn-danger">Delete</a>
 
                       <input type="submit" name="update" value="Update" class="btn btn-primary pull-right">
-
-
 
                    </div>
 
@@ -141,3 +141,70 @@ if(empty($_GET['id'])){
         <!-- /#page-wrapper -->
 
   <?php include("includes/footer.php"); ?>
+
+<script type="text/javascript">
+
+jQuery(document).ready(function($){
+
+  var user_href;
+  var user_href_splitted;
+  var user_id;
+  var image_href;
+  var image_href_splitted;
+  var image_name;
+  var photo_id;
+
+
+$('.modal_thumbnails').click(function() {
+
+$('#set_user_image').prop('disabled', false);
+
+  user_href = $("#user-id").prop('href');
+  user_href_splitted = user_href.split("=");
+  user_id=user_href_splitted[user_href_splitted.length -1];
+
+ image_src = $(this).prop("src");
+ image_href_splitted = image_src.split("/");
+ image_name=image_href_splitted[image_href_splitted.length -1];
+
+ photo_id = $(this).attr("data");
+
+ $.ajax({
+   url: "includes/ajax_code.php",
+   data:{photo_id: photo_id},
+   type:"POST",
+   success:function(data){
+     if(!data.error){
+       $("#modal_sidebar").html(data);
+     }
+   }
+ })
+
+});
+
+$('#set_user_image').click(function() {
+
+  $.ajax({
+
+   url: "includes/ajax_code.php",
+   data:{image_name: image_name, user_id: user_id},
+   type: "POST",
+   success:function(data){
+     if(!data.error){
+
+      $(".user_image_box a img").prop('src', data);
+
+    }
+
+   }
+
+
+  }); //end of ajax function
+
+
+}); // end of modal_thumbnails
+
+}); // end of document ready
+
+
+</script>

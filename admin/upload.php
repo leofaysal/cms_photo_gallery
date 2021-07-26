@@ -3,11 +3,11 @@
 <?php
  $message="";
 
- if(isset($_POST['save']))  {
+ if(isset($_FILES['file']))  {
 
   $photo = new Photo();
   $photo->title = $_POST['title'];
-  $photo->set_file($_FILES['file_upload']);
+  $photo->set_file($_FILES['file']);
 
   if($photo->save()){
     $message = "Photo uploaded Successfully";
@@ -45,6 +45,9 @@
                         Upload Photos
 
                       </h1>
+                      <div class="row">
+
+
                       <div class="col-md-6">
 
                         <?php echo $message?>
@@ -54,13 +57,23 @@
                           <input type="text" name="title" class="form-control">
                         </div>
                         <div class="form-group">
-                          <input type="file" name="file_upload" >
+                          <input type="file" name="file" >
                         </div>
                         <input type="submit" name="save" value="Save">
 
                       </form>
                       </div>
+                    </div>
+                     <!-- end of row -->
 
+                     <div class="row">
+                       <div class="col-lg-12">
+                         <form action="upload.php" class="dropzone">
+
+                         </form>
+                       </div>
+
+                     </div>
                   </div>
               </div>
               <!-- /.row -->

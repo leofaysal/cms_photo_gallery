@@ -32,6 +32,7 @@ $comments = Comment::find_all();
                           All Comments
 
                       </h1>
+                      <p class="bg-success"><?php echo $message;?></p>
 
 
                       <div class="col-md-12">

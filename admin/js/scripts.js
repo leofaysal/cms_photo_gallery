@@ -1,17 +1,12 @@
-$(document).ready(function() {
-$('#summernote').summernote({
- height: 300
-});
+/**** Edit Photo Sidebar****/
 
-
-});
-
-
-$(document).ready(function() {
-$('.modal_thumbnails').click(function() {
-
-  $('#set_user_image').prop('disabled', false);
-
-});
-
-});
+// $(document).ready(function(){
+//
+// $(".info-box-header").click(function(){
+//
+//   alert("hello");
+// });
+//
+//
+//
+// });

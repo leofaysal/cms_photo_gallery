@@ -137,4 +137,24 @@
 
         <!-- /#page-wrapper -->
 
+
   <?php include("includes/footer.php"); ?>
+
+  <script type="text/javascript">
+
+  jQuery(document).ready(function($){
+  $('#summernote').summernote({
+   height: 300
+  });
+
+  $(".info-box-header").click(function(){
+
+  $(".inside").slideToggle("fast");
+
+  $("#toggle").toggleClass("glyphicon-menu-down glyphicon , glyphicon-menu-up glyphicon");
+  });
+
+
+  });
+
+  </script>

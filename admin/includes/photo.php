@@ -91,6 +91,20 @@ public function set_file($file) {
       }
   }// end of save function
 
+
+public static function display_sidebar_data($photo_id) {
+
+  $photo = Photo::find_by_id($photo_id);
+
+  $output = "<a class='thumbnail' href='#'><img width='100' src='{$photo->picture_path()}'></a>";
+  $output .= "<p> Image Name : {$photo->filename}</p>";
+  $output .= "<p> Image Type: {$photo->type}</p>";
+  $output .= "<p> Image Size: {$photo->size}</p>";
+
+  echo $output;
+
+}
+
 public function delete_photo() {
 
    if($this->delete()) {

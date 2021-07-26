@@ -9,14 +9,17 @@
    if($user) {
 
     $user->username= $_POST['username'];
-    $user->first_name=$_POST['first_name'];
+    $user->first_name= $_POST['first_name'];
     $user->last_name= $_POST['last_name'];
     $user->password= $_POST['password'];
 
 
     $user->set_file($_FILES['user_image']);
 
-    $user->save_user_image();
+    $user->upload_photo();
+    $user->save();
+    $session->message("The user {$user->username} has been added");
+    redirect("users.php");
 
    }
 
